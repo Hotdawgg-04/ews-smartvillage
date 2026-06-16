@@ -1001,9 +1001,9 @@ const chartTitleStyle = {
   color: "var(--text)",
   fontWeight: "700",
 };
- = {
+const forecastItemStyle = {
   padding: "15px",
-  borderRadius: "12px",const forecastItemStyle
+  borderRadius: "12px",
 };
 
 export default Dashboard;
