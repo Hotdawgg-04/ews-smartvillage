@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api";
 import {
   LineChart,
   Line,
@@ -36,9 +36,7 @@ function RiwayatData() {
     setIsLoading(true);
     try {
       // Mengambil dari Endpoint /history yang tidak di-limit
-      const response = await axios.get(
-        "http://192.168.100.101:5000/api/logs/history",
-      );
+      const response = await api.get("/api/logs/history");
       const data = response.data;
 
       const formattedData = [...data].reverse().map((item) => {

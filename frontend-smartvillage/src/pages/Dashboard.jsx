@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import api from "../api";
 import axios from "axios";
 import {
   LineChart,
@@ -62,14 +63,14 @@ function Dashboard() {
   const [thresholds, setThresholds] = useState(null);
   const [warnings, setWarnings] = useState([]);
 
-  const OWM_API_KEY = "4f1f5b962de78f3c73a8992ae9f3dd08";
+  const OWM_API_KEY = import.meta.env.VITE_OWM_API_KEY;
   const WEATHER_CITY = "Benowo, Surabaya";
   const DISPLAY_LOCATION = "Kandangan, Kec. Benowo";
   const CASE_LABEL = "Pertanian Sawah (Padi)";
 
   const fetchSettings = async () => {
     try {
-      const res = await axios.get("http://192.168.100.101:5000/api/settings");
+      const res = await api.get("/api/settings");
       setThresholds(res.data);
     } catch (err) {
       console.error("Gagal load setting", err);
@@ -78,9 +79,7 @@ function Dashboard() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        "http://192.168.100.101:5000/api/logs/live",
-      );
+      const response = await api.get("/api/logs/live");
       const data = response.data;
       if (data.length > 0) {
         setLatestData(data[0]);
@@ -179,7 +178,9 @@ function Dashboard() {
       }
       setForecast({ chanceOfRain, next5Days });
       setScrollForecast(hourly24Points);
-    } catch (error) {}
+    } catch (error) {
+      console.error("❌ Gagal ambil data satelit di Frontend:", error);
+    }
   };
 
   // --- ENGINE LOGIKA PERINGATAN (DIHUBUNGKAN KE DATABASE) ---
@@ -1000,9 +1001,9 @@ const chartTitleStyle = {
   color: "var(--text)",
   fontWeight: "700",
 };
-const forecastItemStyle = {
+ = {
   padding: "15px",
-  borderRadius: "12px",
+  borderRadius: "12px",const forecastItemStyle
 };
 
 export default Dashboard;

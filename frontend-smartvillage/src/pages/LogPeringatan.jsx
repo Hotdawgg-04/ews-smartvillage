@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api";
 import {
   AlertTriangle,
   Clock,
@@ -66,9 +66,7 @@ function LogPeringatan() {
     setIsLoading(true);
     setErrorMsg(null);
     try {
-      const response = await axios.get(
-        "http://192.168.100.101:5000/api/alerts",
-      );
+      const response = await api.get("/api/alerts");
       const rawData = response.data;
 
       if (!Array.isArray(rawData)) throw new Error("Format data tidak valid.");

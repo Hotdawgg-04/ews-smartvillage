@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api";
 import {
   Settings,
   Wifi,
@@ -33,9 +33,7 @@ function ManajemenPerangkat() {
 
   const loadInitialSettings = async () => {
     try {
-      const response = await axios.get(
-        "http://192.168.100.101:5000/api/settings",
-      );
+      const response = await api.get("/api/settings");
       if (response.data) {
         setThresholds({
           suhuWaspada: response.data.suhu_waspada,
@@ -62,9 +60,7 @@ function ManajemenPerangkat() {
 
   const refreshDeviceHealth = async () => {
     try {
-      const response = await axios.get(
-        "http://192.168.100.101:5000/api/settings",
-      );
+      const response = await api.get("/api/settings");
       if (response.data) {
         setIsOnline(response.data.status_koneksi === 1);
         setLastUpdate(
@@ -103,7 +99,7 @@ function ManajemenPerangkat() {
     setSaveSuccess(false);
     setSaveError("");
     try {
-      await axios.put("http://192.168.100.101:5000/api/settings", {
+      await api.put("/api/settings", {
         suhu_waspada: thresholds.suhuWaspada,
         kelembaban_kritis: thresholds.kelembabanKritis,
         cahaya_waspada: thresholds.cahayaWaspada,

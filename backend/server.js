@@ -11,7 +11,7 @@ app.use(express.json());
 
 // --- ENGINE SATELIT BACKEND ---
 let chanceOfRainSatelit = 0;
-const OWM_API_KEY = "4f1f5b962de78f3c73a8992ae9f3dd08";
+const OWM_API_KEY = process.env.OWM_API_KEY;
 const CITY = "Benowo, Surabaya";
 
 const DEVICE_ID = process.env.DEFAULT_DEVICE_ID || "ESP32-NodeMCU";
@@ -162,7 +162,7 @@ client.on("message", (topic, message) => {
         ) {
           catatPeringatan(
             "Bahaya",
-            "Anomali Cuaca Mikro",
+            "Anomali Cuaca Mikro (Hujan Tiba-tiba)",
             `Satelit Prediksi Hujan ${chanceOfRainSatelit}%, namun Kondisi Sensor Lahan Kering`,
           );
         }
