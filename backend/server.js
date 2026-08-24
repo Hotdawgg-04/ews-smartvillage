@@ -12,7 +12,7 @@ app.use(express.json());
 // --- ENGINE SATELIT BACKEND ---
 let chanceOfRainSatelit = 0;
 const OWM_API_KEY = process.env.OWM_API_KEY;
-const CITY = "Benowo, Surabaya";
+const CITY = process.env.WEATHER_CITY || "Kandangan, Kec. Benowo";
 
 const DEVICE_ID = process.env.DEFAULT_DEVICE_ID || "ESP32-NodeMCU";
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";

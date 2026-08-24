@@ -64,7 +64,8 @@ function Dashboard() {
   const [warnings, setWarnings] = useState([]);
 
   const OWM_API_KEY = import.meta.env.VITE_OWM_API_KEY;
-  const WEATHER_CITY = "Benowo, Surabaya";
+  const WEATHER_CITY =
+    import.meta.env.VITE_WEATHER_CITY || "Kandangan, Kec. Benowo";
   const DISPLAY_LOCATION = "Kandangan, Kec. Benowo";
   const CASE_LABEL = "Pertanian Sawah (Padi)";
 
